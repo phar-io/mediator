@@ -1,0 +1,27 @@
+{
+	"name": "org_heigl/single-phar-plugin",
+	"description": "Deploy single phars via composer",
+	"type": "composer-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Andreas Heigl",
+			"email": "andreas@heigl.org"
+		}
+	],
+	"require": {
+		"composer-plugin-api": "^1.1",
+		"phar-io/single-phar-plugin-base": "^0.1"
+	},"extra": {
+	"class": "Org_Heigl\\SinglePharPlugin\\Plugin"
+},
+	"autoload": {
+		"psr-4": {
+			"Org_Heigl\\SinglePharPlugin\\": "src/"
+		}
+	},
+	"repositories": [{
+		"type": "vcs",
+		"url": "https://github.com/heiglandreas/singlePharPluginBase"
+	}]
+}
