@@ -10,11 +10,13 @@
 		}
 	],
 	"require": {
+		"php": "^7.4 || ~8.0.0",
 		"composer-plugin-api": "^1.1",
 		"phar-io/single-phar-plugin-base": "^0.1"
-	},"extra": {
-	"class": "Org_Heigl\\SinglePharPlugin\\Plugin"
-},
+	},
+	"extra": {
+		"class": "Org_Heigl\\SinglePharPlugin\\Plugin"
+	},
 	"autoload": {
 		"psr-4": {
 			"Org_Heigl\\SinglePharPlugin\\": "src/"

@@ -15,6 +15,7 @@ use PharIo\SinglePharPluginBase\File;
 use PharIo\SinglePharPluginBase\FileList;
 use PharIo\SinglePharPluginBase\PluginBase;
 use PharIo\SinglePharPluginBase\Url;
+use function var_dump;
 
 class Plugin extends PluginBase
 {
@@ -22,12 +23,14 @@ class Plugin extends PluginBase
     {
         $installer = $this->createInstaller(
             // Replace this with the name of your plugin
-            'JUnitDiff',
+            'org_heigl/single-phar-plugin',
             // replace this with the path to your key directory
             __DIR__ . '/../keys/',
             // needs to be passed on!
             $event
         );
+
+        var_dump(get_class($installer));
 
         $installer->install(new FileList(
         	new File(
@@ -45,5 +48,6 @@ class Plugin extends PluginBase
 	            )
 	        ),
         ));
+    	var_dump('tet');exit();
     }
 }
