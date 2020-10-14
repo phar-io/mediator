@@ -30,8 +30,6 @@ class Plugin extends PluginBase
             $event
         );
 
-        var_dump(get_class($installer));
-
         $installer->install(new FileList(
         	new File(
 	            // Replace this with the name of the binary that you want to use within the folder vendor/bin/
@@ -48,6 +46,5 @@ class Plugin extends PluginBase
 	            )
 	        ),
         ));
-    	var_dump('tet');exit();
     }
 }
