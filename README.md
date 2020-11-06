@@ -1,4 +1,4 @@
-# Single Phar Plugin
+# Mediator
 
 This is a demo plugin that can be used to create your own Composer Plugin
 that installs a PHAR file instead of a sh*tload of sourcecode
@@ -8,7 +8,7 @@ that installs a PHAR file instead of a sh*tload of sourcecode
 Create your own copy of this project by running
 
 ```bash
-$ composer create-project org_heigl/single-phar-plugin /path/to/your/source/path
+$ composer create-project phar-io/mediator /path/to/your/source/path
 ```
 
 After that you should replace or adapt the following informations in these
@@ -16,7 +16,7 @@ files:
 
 ### `src/Plugin.php`
 
-* Line 11: replace `Org_Heigl\SinglePharPlugin` with a namespace for your Plugin
+* Line 11: replace `PharIo\Mediator` with a namespace for your Plugin
   Note: We need this same namespace later in line 16 of the `compposer.json`
   again
 * Line 25: replace `JUnitDiff` with the name of your Package.

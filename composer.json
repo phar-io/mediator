@@ -1,29 +1,26 @@
 {
-	"name": "org_heigl/single-phar-plugin",
-	"description": "Deploy single phars via composer",
+	"name": "phar-io/mediator",
+	"description": "Deploy phars via composer",
 	"type": "composer-plugin",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Andreas Heigl",
-			"email": "andreas@heigl.org"
+			"email": "andreas@heigl.org",
+			"role": "Developer"
 		}
 	],
 	"require": {
 		"php": "^7.4 || ~8.0.0",
-		"composer-plugin-api": "^1.1",
-		"phar-io/single-phar-plugin-base": "^0.1"
+		"composer-plugin-api": "^1.1||^2.0",
+		"phar-io/composer-distributor": "^0.2"
 	},
 	"extra": {
-		"class": "Org_Heigl\\SinglePharPlugin\\Plugin"
+		"class": "PharIo\\Mediator\\Plugin"
 	},
 	"autoload": {
 		"psr-4": {
-			"Org_Heigl\\SinglePharPlugin\\": "src/"
+			"PharIo\\Mediator\\": "src/"
 		}
-	},
-	"repositories": [{
-		"type": "vcs",
-		"url": "https://github.com/heiglandreas/singlePharPluginBase"
-	}]
+	}
 }

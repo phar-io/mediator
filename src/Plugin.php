@@ -1,21 +1,19 @@
 <?php
-
-declare(strict_types=1);
-
 /**
- * Copyright Andrea Heigl <andreas@heigl.org>
+ * Copyright The ComposerDistributor-Team
  *
  * Licenses under the MIT-license. For details see the included file LICENSE.md
  */
 
-namespace Org_Heigl\SinglePharPlugin;
+declare(strict_types=1);
+
+namespace PharIo\Mediator;
 
 use Composer\Installer\PackageEvent;
-use PharIo\SinglePharPluginBase\File;
-use PharIo\SinglePharPluginBase\FileList;
-use PharIo\SinglePharPluginBase\PluginBase;
-use PharIo\SinglePharPluginBase\Url;
-use function var_dump;
+use PharIo\ComposerDistributor\File;
+use PharIo\ComposerDistributor\FileList;
+use PharIo\ComposerDistributor\PluginBase;
+use PharIo\ComposerDistributor\Url;
 
 class Plugin extends PluginBase
 {
