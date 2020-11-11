@@ -42,7 +42,7 @@ class Plugin extends PluginBase
 	                // [README.md](https://)
 	                'https://github.com/heiglandreas/JUnitDiff/releases/download/%version%/junitdiff.phar.asc'
 	            )
-	        ),
+	        )
         ));
     }
 }
