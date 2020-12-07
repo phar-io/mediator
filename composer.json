@@ -12,15 +12,30 @@
 	],
 	"require": {
 		"php": "^7.2 || ~8.0.0",
+		"ext-dom": "*",
 		"composer-plugin-api": "^1.1||^2.0",
 		"phar-io/composer-distributor": "^0.2"
 	},
 	"extra": {
 		"class": "PharIo\\Mediator\\Plugin"
 	},
+	"config": {
+		"sort-packages": true
+	},
 	"autoload": {
 		"psr-4": {
 			"PharIo\\Mediator\\": "src/"
 		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PharIo\\MediatorTest\\": "tests/"
+		}
+	},
+	"require-dev": {
+		"composer/composer": "^2.0"
+	},
+	"scripts":{
+		"post-create-project-cmd": "PharIo\\Mediator\\Installer::install"
 	}
 }
