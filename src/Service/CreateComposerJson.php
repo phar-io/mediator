@@ -34,7 +34,7 @@ class CreateComposerJson
 			],
 			'autoload' => [
 				'psr-4' => [
-					$namespace => 'src/'
+					$namespace . '\\' => 'src/'
 				]
 			]
 		];
