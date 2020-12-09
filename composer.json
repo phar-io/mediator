@@ -14,7 +14,7 @@
 		"php": "^7.2 || ~8.0.0",
 		"ext-dom": "*",
 		"composer-plugin-api": "^1.1||^2.0",
-		"phar-io/composer-distributor": "^0.2"
+		"phar-io/composer-distributor": "^0.3"
 	},
 	"extra": {
 		"class": "PharIo\\Mediator\\Plugin"
@@ -36,6 +36,9 @@
 		"composer/composer": "^2.0"
 	},
 	"scripts":{
-		"post-create-project-cmd": "PharIo\\Mediator\\Installer::install"
+		"post-create-project-cmd": [
+			"PharIo\\Mediator\\Installer::install",
+			"composer update"
+		]
 	}
 }

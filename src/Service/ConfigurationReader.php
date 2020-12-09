@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace PharIo\Mediator\Service;
 
 use Composer\IO\IOInterface;
+use PharIo\ComposerDistributor\Config\Config;
+use PharIo\ComposerDistributor\File;
+use PharIo\ComposerDistributor\FileList;
+use PharIo\ComposerDistributor\Url;
 use PharIo\Mediator\Configuration;
 use function implode;
 use function sprintf;
@@ -19,13 +23,16 @@ final class ConfigurationReader
 		$this->io = $io;
 	}
 
-	public function getConfiguration(): Configuration
+	public function getConfiguration(): Config
 	{
-		return new Configuration(
+		return new Config(
 			$this->readPluginName(),
-			$this->readPharName(),
-			$this->readPharFileUrl(),
-			$this->readSignatureUrl()
+			new FileList(new File(
+				$this->readPharName(),
+				Url::fromString($this->readPharFileUrl()),
+				Url::fromString($this->readSignatureUrl())
+			)),
+			'keys'
 		);
 	}
 

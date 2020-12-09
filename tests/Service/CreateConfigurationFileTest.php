@@ -3,6 +3,10 @@
 namespace PharIo\MediatorTest\Service;
 
 use DOMDocument;
+use PharIo\ComposerDistributor\Config\Config;
+use PharIo\ComposerDistributor\File;
+use PharIo\ComposerDistributor\FileList;
+use PharIo\ComposerDistributor\Url;
 use PharIo\Mediator\Configuration;
 use PharIo\Mediator\Service\CreateConfigurationFile;
 use PHPUnit\Framework\TestCase;
@@ -17,11 +21,14 @@ class CreateConfigurationFileTest extends TestCase
 	 */
 	public function testThatXmlCreationWorks(): void
 	{
-		$config = new Configuration(
+		$config = new Config(
 			'namespace/name',
-			'pharName',
-			'https://example.com/file.phar',
-			'https://example.com/file.phar.asc'
+			new FileList(new File(
+				'pharName',
+				Url::fromString('https://example.com/file.phar'),
+				Url::fromString('https://example.com/file.phar.asc')
+			)),
+			'keys'
 		);
 
 		$creator = new CreateConfigurationFile(new SplFileInfo(sys_get_temp_dir()));
@@ -31,6 +38,6 @@ class CreateConfigurationFileTest extends TestCase
 
 		$doc = new DOMDocument();
 		$doc->load(sys_get_temp_dir() . '/mediator.xml');
-		self::assertTrue($doc->schemaValidate(__DIR__ . '/distributor.xsd'));
+		self::assertTrue($doc->schemaValidate(__DIR__ . '/../../vendor/phar-io/composer-distributor/distributor.xsd'));
 	}
 }

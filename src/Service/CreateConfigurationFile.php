@@ -6,6 +6,8 @@ namespace PharIo\Mediator\Service;
 
 use DOMDocument;
 use Exception;
+use PharIo\ComposerDistributor\Config\Config;
+use PharIo\ComposerDistributor\File;
 use PharIo\Mediator\Configuration;
 use SplFileInfo;
 use function file_put_contents;
@@ -19,7 +21,7 @@ final class CreateConfigurationFile
 		$this->targetDirectory = $targetDirectory;
 	}
 
-	public function __invoke(Configuration $configuration): void
+	public function __invoke(Config $configuration): void
 	{
 		$document = new DOMDocument('1.0', 'UTF-8');
 		$document->formatOutput = true;
@@ -32,17 +34,22 @@ final class CreateConfigurationFile
 			'xsi:schemaLocation',
 			'https://phar.io/xml/distributor/1.0/schema.xsd'
 		);
-		$distributor->setAttribute('packageName', $configuration->pluginName());
-		$distributor->setAttribute('keyDirectory', 'keys');
+		$distributor->setAttribute('packageName', $configuration->package());
+		if ($configuration->keyDirectory() !== null) {
+			$distributor->setAttribute('keyDirectory', $configuration->keyDirectory());
+		}
 		$document->appendChild($distributor);
 
-		$phar = $document->createElement('phar');
-		$distributor->appendChild($phar);
+		/** @var File $pharConfig */
+		foreach ($configuration->phars()->getList() as $pharConfig) {
+			$phar = $document->createElement('phar');
+			$distributor->appendChild($phar);
 
-		$phar->setAttribute('name', $configuration->pharName());
-		$phar->setAttribute('file', $configuration->pharDownloadLocation());
-		if ('' !== $configuration->pharSignatureDownloadLocation()) {
-			$phar->setAttribute('signature', $configuration->pharSignatureDownloadLocation());
+			$phar->setAttribute('name', $pharConfig->pharName());
+			$phar->setAttribute('file', $pharConfig->pharUrl()->toString());
+			if ($pharConfig->signatureUrl() !== null) {
+				$phar->setAttribute('signature', $pharConfig->signatureUrl()->toString());
+			}
 		}
 
 		file_put_contents(
