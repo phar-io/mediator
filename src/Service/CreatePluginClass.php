@@ -6,37 +6,28 @@ namespace PharIo\Mediator\Service;
 
 use SplFileInfo;
 use function file_exists;
+use function file_get_contents;
 use function file_put_contents;
 
 final class CreatePluginClass
 {
 	private $targetDirectory;
 
+	private $template;
+
 	public function __construct(SplFileInfo $targetDirectory)
 	{
 		$this->targetDirectory = $targetDirectory;
+		$this->template = file_get_contents(__DIR__ . '/../Plugin.php');
 	}
 
 	public function __invoke(string $namespace): void
 	{
-		$class = <<<EOF
-<?php
-
-declare(strict_types=1);
-
-namespace $namespace;
-
-use PharIo\ComposerDistributor\ConfiguredMediator;
-
-final class Plugin extends ConfiguredMediator
-{
-    public function getDistributorConfig(): string
-    {
-        return __DIR__ . '/../mediator.xml';
-    }
-}
-
-EOF;
+		$class = preg_replace(
+			'/namespace\s[^;]+;/',
+			'namespace ' . $namespace . ';',
+			$this->template
+		);
 
 		if (! file_exists($this->targetDirectory->getRealPath() . '/src' )) {
 			mkdir($this->targetDirectory->getRealPath() . '/src', 0755);
