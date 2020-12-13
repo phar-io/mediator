@@ -7,6 +7,7 @@ namespace PharIo\Mediator\Service;
 use Composer\IO\IOInterface;
 use function implode;
 use function sprintf;
+use function strlen;
 use function strpos;
 
 final class NamespaceReader
@@ -38,10 +39,22 @@ final class NamespaceReader
 		while (true) {
 			$answer = $this->io->ask(implode("\n", $query));
 
-			if (false !== strpos($answer, '\\')) {
-				return $answer;
+			if (strpos($answer, '\\') === 0) {
+				$this->io->write('<error>A namespace is not allowed to start with a backslash</error>');
+				continue;
 			}
-			$this->io->write('<error>This does not seem to be a valid namespace name</error>');
+
+			if (strrpos($answer, '\\') === strlen($answer) - 1) {
+				$this->io->write('<error>A namespace is not allowed to end with a backslash</error>');
+				continue;
+			}
+
+			if (! preg_match('/^[a-zA-Z][a-zA-Z0-9]*(\\[a-zA-Z][a-zA-Z0-9]*)*$/', $answer)) {
+				$this->io->write('<error>This is not a valid namespace name.</error>');
+				continue;
+			}
+
+			return $answer;
 		}
 	}
 }
