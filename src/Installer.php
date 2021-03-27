@@ -28,7 +28,7 @@ final class Installer
 		$this->composer = $composer;
 	}
 
-	public function install(Event $event): void
+	public static function install(Event $event): void
 	{
 		$installer = new self($event->getIO(), $event->getComposer());
 
