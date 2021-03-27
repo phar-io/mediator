@@ -27,7 +27,7 @@ final class CreateConfigurationFile
 		$document->formatOutput = true;
 		$distributor = $document->createElementNS(
 			'https://phar.io/composer-distributor',
-			'distributor',
+			'distributor'
 		);
 		$distributor->setAttributeNS(
 			'http://www.w3.org/2001/XMLSchema-instance',
