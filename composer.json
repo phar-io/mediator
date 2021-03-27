@@ -8,19 +8,47 @@
 			"name": "Andreas Heigl",
 			"email": "andreas@heigl.org",
 			"role": "Developer"
+		},
+		{
+			"name": "Arne Blankerts",
+			"email": "arne@blankerts.de",
+			"role": "Developer"
+		},
+		{
+			"name": "Sebastian Feldmann",
+			"email": "sf@sebastian-feldmann.info",
+			"role": "Developer"
 		}
 	],
 	"require": {
 		"php": "^7.2 || ~8.0.0",
+		"ext-dom": "*",
 		"composer-plugin-api": "^1.1||^2.0",
-		"phar-io/composer-distributor": "^0.2"
+		"phar-io/composer-distributor": "^1.0"
 	},
 	"extra": {
 		"class": "PharIo\\Mediator\\Plugin"
+	},
+	"config": {
+		"sort-packages": true
 	},
 	"autoload": {
 		"psr-4": {
 			"PharIo\\Mediator\\": "src/"
 		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PharIo\\MediatorTest\\": "tests/"
+		}
+	},
+	"require-dev": {
+		"composer/composer": "^2.0"
+	},
+	"scripts":{
+		"post-create-project-cmd": [
+			"PharIo\\Mediator\\Installer::install",
+			"composer update"
+		]
 	}
 }
