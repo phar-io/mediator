@@ -26,7 +26,7 @@ class CreateComposerJson
 			'type' => 'composer-plugin',
 			'require' => [
 				'composer-plugin-api' => '^2.0',
-				'phar-io/composer-distributor' => '~0.5'
+				'phar-io/composer-distributor' => '^1.0'
 
 			],
 			'extra' => [
