@@ -49,7 +49,7 @@ final class NamespaceReader
 				continue;
 			}
 
-			if (! preg_match('/^[a-zA-Z][a-zA-Z0-9]*(\\[a-zA-Z][a-zA-Z0-9]*)*$/', $answer)) {
+			if (! preg_match('/^([a-zA-Z]+[a-zA-Z0-9]*)+(\\\[a-zA-Z]+[a-zA-Z0-9]*)*$/', $answer)) {
 				$this->io->write('<error>This is not a valid namespace name.</error>');
 				continue;
 			}
